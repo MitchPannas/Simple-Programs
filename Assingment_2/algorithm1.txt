@@ -1,0 +1,85 @@
+/**********************************************
+Author: Mitchell Panicciari
+Date: 11/05/2015
+Purpose: Assingment_2 Algorithm Question_1
+***********************************************/
+
+CONSTANT INTEGER MAX = 22
+CONSTANT INTEGER ALPHABET = 27
+
+/**********************************************
+Description: Getting the input from the user and inserting the values in the userInput array
+Parameters: char userInput[], int size, int i
+Return value: Changing the array values for userInput in main through automatic pass by reference
+***********************************************/
+VOID function GetInput(CHARACTER userInput[], INTEGER size)
+	INTEGER i
+
+	output "Please enter a character value up to 10 characters long.\n"
+	input userInput[]
+	userInput[strlen(userInput) - 1] = \O //Changing the last value of the array to a null instead of a new line
+	
+	for ( i = 0; i < size; i++)
+		userInput[i] = toLower(userInput[i]); //Using the C standard library to convert the character in userInput[i] to lower case
+	end for
+
+	return
+end function
+
+/**********************************************
+Description: Looping through the array and counting each time a character occured in the string
+Parameters: char userInput[], int size, int i, int counter[]
+Return value: Changing the array values for userInput in main through automatic pass by reference
+***********************************************/
+VOID function CountLetters(CHARACTER userInput[], INTEGER size, INTEGER counter[])
+	INTEGER i;
+	
+	do
+		for (i = 0; i < size; i++)
+			if (userInput[i] >= 'a' AND userInput[i] <= 'z') then
+				counter[userInput[i] - 'a']++
+			else
+				counter[26]++
+			end if
+		end for
+	until (userInput[i] != '\0'
+	
+	return
+
+end function
+
+/**********************************************
+Description: Printing out how many times a character occured in the string
+Parameters: int counter[], int i
+Return value: Does not return any value
+***********************************************/
+VOID function PrintResults(INTEGER counter[])
+	int i
+	
+	for (i = 0; i < 26; i++)
+		if (counter[i] != 0) then
+			printf("i occurs counter[i] time(s) in this string.\n", i + 'a', counter[i])
+		end if
+	end for
+	
+	if (counter[26] != 0) then
+		output "Non-alphabetical characters occurred counter[26] time(s).\n", counter[26]
+	end if
+	
+	return
+end function
+
+/**********************************************
+Description: Main function to call the other functions in order that they need to be executed.
+Parameters: char userInput[], constant int MAX, int counter[], constant int ALPHABET
+Return value: 0
+***********************************************/
+function main()	
+	CHARACTER userInput[MAX] = {'\0'} 
+	INTEGER counter[ALPHABET] = {0}
+	
+	GetInput(userInput, MAX)
+	CountLetters(userInput, MAX, counter)
+	PrintResults(counter) 
+
+end function

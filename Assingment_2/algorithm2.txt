@@ -1,0 +1,93 @@
+/**********************************************
+Author: Mitchell Panicciari
+Date: 11/05/2015
+Purpose: Assingment_2 Algorithm Question_2
+***********************************************/
+
+//Defining the constants
+CONSTANT INTEGER MAX = 10
+CONSTANT INTEGER ROT = 13
+	
+/**********************************************
+Description: Getting the input from the user and inserting the values in the userInput array
+Parameters: char userInput[], int size
+Return value: Changing the array values for userInput in main through automatic pass by reference
+***********************************************/
+VOID function GetInput(CHARACTER userInput[], INTEGER size)
+	output "Please enter a character value up to 10 characters long.\n"
+	input userInput[]
+	userInput[strlen(userInput) - 1] = '\0' //Changing the last value of the array to a null instead of a new line
+
+	return
+end function
+
+/**********************************************
+Description: Looping through the array and converting all alphabetical characters with the rot13 process, non alphabetical characters are ignored and not changed 
+Parameters: char userInput[], int size, int i, const int ROT 
+Return value: Changing the array values for userInput in main through automatic pass by reference
+***********************************************/
+VOID function Rotate13(CHARACTER userInput[], INTEGER size)
+	INTEGER i
+	
+	for (i = 0; i < size; i++)
+		if (userInput[i] < 'A' OR userInput[i] > 'Z' AND userInput[i] < 'a' OR userInput[i] > 'z') then
+			userInput[i] = userInput[i]
+		else
+			if (userInput[i] >= 'A' AND userInput[i] < 'N' OR userInput[i] >= 'a' AND userInput[i] < 'n') then
+				userInput[i] += ROT
+			else
+				userInput[i] -= ROT
+		end if
+	end for	
+
+end function
+
+/**********************************************
+Description: Printing out the converted values of the array of userInput
+Parameters: char userInput[], int size
+Return value: Does not return any value
+***********************************************/
+VOID function PrintResults(CHARACTER userInput[], INTEGER size)
+	output "The new string is: userInput", userInput
+	
+	return
+end function
+	
+/**********************************************
+Description: Asking the user if they would like to enter another set of values
+Parameters: char keepGoing
+Return value: Returns the value char in keepGoing
+***********************************************/
+CHARACTER function WantAnotherGo(void)
+	CHARACTER keepGoing
+	
+	do
+		output "Do you wish to enter another value? (Y for yes, N for no): "
+		input goAgain
+		goAgain = tolower(goAgain) //Using the C standard library to convert the character in goAgain to lower case
+		
+		if (keepGoing != 'y' OR keepGoing != 'n') then
+			output "Invalid input."
+		end if
+	until keepGoing == 'y'
+	
+	return(keepGoing)
+end function
+
+/**********************************************
+Description: Main function to call the other functions in order that they need to be executed. Also looping through those functions until the user chooses to stop
+Parameters: char userInput[], constant int MAX, char keepGoing
+Return value: 0
+***********************************************/
+function main()	
+	CHARACTER userInput[MAX] = {'\0'}
+	CHARACTER keepGoing
+		
+	do
+		GetInput(userInput, MAX)
+		Rotate13(userInput, MAX)
+		PrintResults(userInput, MAX)
+		keepGoing = WantAnotherGo()
+	until goAgain == 'y'
+
+end function

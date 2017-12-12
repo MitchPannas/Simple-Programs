@@ -1,0 +1,40 @@
+Author(s): Mitchell Panicciari, Mitchell Smoothy
+Date: 17/03/2015
+
+START
+	
+	int side1, side2, side3
+	
+	output "Please enter side 1 of the triangle: "
+	input side1
+	
+	output "Please enter side 2 of the triangle: "
+	input side2
+	
+	output "Please enter side 3 of the triangle: "
+	input side3
+
+	if side1 + side2 < side3 or side1 + side3 < side2 or side2 + side3 < side1 then
+		output "Invalid triangle."
+
+		else if side1 == side2 & side2 == side3 then
+			output "This is an equilateral triangle."
+		
+			else if  side1 == side2 or side2 == side3 or side1 == side3
+				output "This is an isosceles triangle."
+			
+				else
+					output "This is a scalene triangle."
+			end if
+		end if		
+	end if
+	
+END
+	
+	
+
+
+
+
+	
+	
